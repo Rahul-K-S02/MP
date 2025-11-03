@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthcare Portal</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex justify-center items-center p-6">
+  <div class="bg-white shadow-2xl rounded-2xl w-full max-w-md p-8 transition-all duration-300">
+    <!-- Tabs -->
+    <div class="flex justify-between items-center mb-8 bg-blue-50 p-2 rounded-xl">
+      <button id="adminBtn"
+        class="tab-btn flex-1 py-2 text-sm sm:text-base font-semibold text-blue-700 bg-white rounded-lg shadow transition-all duration-200">
+        Admin Login
+      </button>
+      <button id="doctorBtn"
+        class="tab-btn flex-1 py-2 text-sm sm:text-base font-medium text-gray-600 hover:bg-white hover:shadow rounded-lg transition-all duration-200">
+        Doctor Register
+      </button>
+      <button id="patientBtn"
+        class="tab-btn flex-1 py-2 text-sm sm:text-base font-medium text-gray-600 hover:bg-white hover:shadow rounded-lg transition-all duration-200">
+        Patient Register
+      </button>
+    </div>
+
+    <!-- Forms -->
+    <!-- Admin Login -->
+    <form id="adminForm" class="space-y-4" action="/admin" method="POST">
+      <h1 class="text-2xl font-semibold text-center text-blue-600 mb-4">Admin Login</h1>
+      <div>
+        <label for="adminEmail" class="block text-gray-700 font-medium mb-1">Email :</label>
+        <input type="email" id="adminEmail" placeholder="Enter your email..."
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none" name="email"/>
+      </div>
+      <div>
+        <label for="adminPassword" class="block text-gray-700 font-medium mb-1">Password :</label>
+        <input type="password" id="adminPassword" placeholder="Enter your password.."
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none" name="password"/>
+      </div>
+      <button
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg py-2 transition duration-200">
+        Login
+      </button>
+    </form>
+
+    <!-- Doctor Register -->
+    <form id="doctorForm" class="hidden space-y-4">
+      <h1 class="text-2xl font-semibold text-center text-blue-600 mb-4">Doctor Register</h1>
+      <div id="doctorRegMessage" class="hidden p-3 rounded-lg mb-4"></div>
+      <div>
+        <label for="docName" class="block text-gray-700 font-medium mb-1">Full Name :</label>
+        <input type="text" id="docName" placeholder="Enter your full name" required
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none" name="name"/>
+      </div>
+      <div>
+        <label for="docEmail" class="block text-gray-700 font-medium mb-1">Email :</label>
+        <input type="email" id="docEmail" placeholder="Enter your email" required
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none" name="email"/>
+      </div>
+      <div>
+        <label for="docPassword" class="block text-gray-700 font-medium mb-1">Password :</label>
+        <input type="password" id="docPassword" placeholder="Enter your password" required minlength="6"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none" name="password"/>
+      </div>
+      <div>
+        <label for="docPhone" class="block text-gray-700 font-medium mb-1">Phone Number :</label>
+        <input type="text" id="docPhone" placeholder="Enter your phone number"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none" name="phone"/>
+      </div>
+      <div>
+        <label for="Location" class="block text-gray-700 font-medium mb-1">Location :</label>
+        <input type="text" id="Location" placeholder="Enter your Location"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none" name="location"/>
+      </div>
+      <div>
+        <label for="Specialization" class="block text-gray-700 font-medium mb-1">Specialization :</label>
+        <input type="text" id="Specialization" placeholder="Enter your Specialization"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none" name="specialization"/>
+      </div>
+       <fieldset class="flex gap-4">
+    <legend class="block text-gray-700 font-medium mb-2">Gender :</legend>
+    <label class="flex items-center text-gray-700 font-medium">
+      <input type="radio" name="gender" class="mr-2 accent-blue-600" value="male" required/> Male
+    </label>
+    <label class="flex items-center text-gray-700 font-medium">
+      <input type="radio" name="gender" class="mr-2 accent-blue-600" value="female" required/> Female
+    </label>
+  </fieldset>
+      <p class="text-sm text-center text-gray-600 mt-4">
+        Already Registered?
+        <a href="/doctorLogin" class="text-blue-600 hover:underline font-medium">Login</a>
+      </p>
+      <button type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg py-2 transition duration-200">
+        Register
+      </button>
+    </form>
+
+    <!-- Patient Register -->
+    <div id="patientForm" class="hidden space-y-4">
+      <h1 class="text-2xl font-semibold text-center text-blue-600 mb-4">Patient Register</h1>
+      <div id="patientMessage" class="hidden p-3 rounded-lg mb-4"></div>
+      
+      <!-- Step 1: Email Input -->
+      <div id="emailStep">
+        <div>
+          <label for="patientEmail" class="block text-gray-700 font-medium mb-1">Email Address *</label>
+          <input type="email" id="patientEmail" placeholder="Enter your email ID" required
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"/>
+        </div>
+        <button type="button" id="sendOtpBtn"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg py-2 transition duration-200 mt-4">
+          <i class="fas fa-paper-plane mr-2"></i>Send OTP
+        </button>
+      </div>
+
+      <!-- Step 2: OTP Verification -->
+      <div id="otpStep" class="hidden">
+        <div>
+          <label for="otpInput" class="block text-gray-700 font-medium mb-1">Enter OTP *</label>
+          <input type="text" id="otpInput" placeholder="Enter 6-digit OTP" maxlength="6" required
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none text-center text-2xl tracking-widest"/>
+          <p class="text-xs text-gray-500 mt-2">Check your email for the OTP code</p>
+        </div>
+        <button type="button" id="verifyOtpBtn"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg py-2 transition duration-200 mt-4">
+          <i class="fas fa-check mr-2"></i>Verify OTP & Register
+        </button>
+        <button type="button" id="resendOtpBtn"
+          class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium rounded-lg py-2 transition duration-200 mt-2">
+          <i class="fas fa-redo mr-2"></i>Resend OTP
+        </button>
+        <button type="button" id="backToEmailBtn"
+          class="w-full text-blue-600 hover:text-blue-700 font-medium py-2 transition duration-200">
+          <i class="fas fa-arrow-left mr-2"></i>Back to Email
+        </button>
+      </div>
+
+      <div class="relative my-4">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-gray-300"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+          <span class="px-2 bg-white text-gray-500 font-medium">OR</span>
+        </div>
+      </div>
+
+      <div
+          class="text-center border-2 border-blue-600 bg-white hover:bg-blue-50 py-2 rounded-lg transition cursor-pointer"
+          onclick="GoogleAuth()"
+        >
+          <i class="fa-brands fa-google mr-2 text-blue-600"></i> 
+          <span class="text-blue-600 font-medium">Login with Google</span>
+        </div>
+    </div>
+  </div>
+
+  <!-- JavaScript for toggling -->
+  <script>
+    const adminBtn = document.getElementById('adminBtn');
+    const doctorBtn = document.getElementById('doctorBtn');
+    const patientBtn = document.getElementById('patientBtn');
+
+    const adminForm = document.getElementById('adminForm');
+    const doctorForm = document.getElementById('doctorForm');
+    const patientForm = document.getElementById('patientForm');
+
+    const buttons = [adminBtn, doctorBtn, patientBtn];
+    const forms = [adminForm, doctorForm, patientForm];
+
+    function showForm(index) {
+      forms.forEach((form, i) => {
+        form.classList.toggle('hidden', i !== index);
+        buttons[i].classList.toggle('bg-white', i === index);
+        buttons[i].classList.toggle('text-blue-700', i === index);
+        buttons[i].classList.toggle('font-semibold', i === index);
+        buttons[i].classList.toggle('shadow', i === index);
+        buttons[i].classList.toggle('text-gray-600', i !== index);
+        buttons[i].classList.toggle('font-medium', i !== index);
+      });
+    }
+
+    adminBtn.addEventListener('click', () => showForm(0));
+    doctorBtn.addEventListener('click', () => showForm(1));
+    patientBtn.addEventListener('click', () => showForm(2));
+
+    // Doctor Registration Form Handler
+    doctorForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const messageDiv = document.getElementById('doctorRegMessage');
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      
+      // Show loading
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Registering...';
+      messageDiv.classList.add('hidden');
+      
+      // Get form data
+      const formData = {
+        name: document.getElementById('docName').value,
+        email: document.getElementById('docEmail').value,
+        password: document.getElementById('docPassword').value,
+        phone: document.getElementById('docPhone').value,
+        location: document.getElementById('Location').value,
+        specialization: document.getElementById('Specialization').value,
+        gender: this.querySelector('input[name="gender"]:checked').value
+      };
+      
+      try {
+        const response = await fetch('/doctor/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          messageDiv.className = 'p-3 rounded-lg mb-4 bg-green-100 border border-green-400 text-green-700';
+          messageDiv.textContent = data.message;
+          messageDiv.classList.remove('hidden');
+          this.reset();
+          
+          // Redirect to login after 2 seconds
+          setTimeout(() => {
+            window.location.href = '/doctorLogin';
+          }, 2000);
+        } else {
+          messageDiv.className = 'p-3 rounded-lg mb-4 bg-red-100 border border-red-400 text-red-700';
+          messageDiv.textContent = data.message || 'Registration failed. Please try again.';
+          messageDiv.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+      } catch (error) {
+        messageDiv.className = 'p-3 rounded-lg mb-4 bg-red-100 border border-red-400 text-red-700';
+        messageDiv.textContent = 'Error registering. Please try again.';
+        messageDiv.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+
+    // Patient Registration - OTP Flow
+    let patientEmailValue = '';
+
+    document.getElementById('sendOtpBtn')?.addEventListener('click', async function() {
+      const emailInput = document.getElementById('patientEmail');
+      const email = emailInput.value.trim();
+      const messageDiv = document.getElementById('patientMessage');
+      const btn = this;
+      const originalText = btn.innerHTML;
+
+      if (!email) {
+        messageDiv.className = 'p-3 rounded-lg mb-4 bg-red-100 border border-red-400 text-red-700';
+        messageDiv.textContent = 'Please enter your email address';
+        messageDiv.classList.remove('hidden');
+        return;
+      }
+
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        messageDiv.className = 'p-3 rounded-lg mb-4 bg-red-100 border border-red-400 text-red-700';
+        messageDiv.textContent = 'Please enter a valid email address';
+        messageDiv.classList.remove('hidden');
+        return;
+      }
+
+      patientEmailValue = email;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+      messageDiv.classList.add('hidden');
+
+      try {
+        const response = await fetch('/patientPage/send-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          messageDiv.className = 'p-3 rounded-lg mb-4 bg-green-100 border border-green-400 text-green-700';
+          messageDiv.textContent = data.message;
+          messageDiv.classList.remove('hidden');
+          
+          // Show OTP step
+          document.getElementById('emailStep').classList.add('hidden');
+          document.getElementById('otpStep').classList.remove('hidden');
+        } else {
+          messageDiv.className = 'p-3 rounded-lg mb-4 bg-red-100 border border-red-400 text-red-700';
+          let errorMsg = data.message || 'Failed to send OTP. Please try again.';
+          if (data.details) {
+            errorMsg += ' (Error: ' + data.details + ')';
+          }
+          messageDiv.textContent = errorMsg;
+          messageDiv.classList.remove('hidden');
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+        }
+      } catch (error) {
+        messageDiv.className = 'p-3 rounded-lg mb-4 bg-red-100 border border-red-400 text-red-700';
+        messageDiv.textContent = 'Error sending OTP. Please try again.';
+        messageDiv.classList.remove('hidden');
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    });
+
+    document.getElementById('verifyOtpBtn')?.addEventListener('click', async function() {
+      const otpInput = document.getElementById('otpInput');
+      const otpCode = otpInput.value.trim();
+      const messageDiv = document.getElementById('patientMessage');
+      const btn = this;
+      const originalText = btn.innerHTML;
+
+      if (!otpCode || otpCode.length !== 6) {
+        messageDiv.className = 'p-3 rounded-lg mb-4 bg-red-100 border border-red-400 text-red-700';
+        messageDiv.textContent = 'Please enter a valid 6-digit OTP';
+        messageDiv.classList.remove('hidden');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Verifying...';
+      messageDiv.classList.add('hidden');
+
+      try {
+        const response = await fetch('/patientPage/verify-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            email: patientEmailValue,
+            otpCode: otpCode
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          messageDiv.className = 'p-3 rounded-lg mb-4 bg-green-100 border border-green-400 text-green-700';
+          messageDiv.textContent = data.message;
+          messageDiv.classList.remove('hidden');
+          
+          // Redirect to patient page
+          setTimeout(() => {
+            window.location.href = data.redirectUrl || '/patientPage';
+          }, 1500);
+        } else {
+          messageDiv.className = 'p-3 rounded-lg mb-4 bg-red-100 border border-red-400 text-red-700';
+          messageDiv.textContent = data.message || 'Invalid OTP. Please try again.';
+          messageDiv.classList.remove('hidden');
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+          otpInput.value = '';
+        }
+      } catch (error) {
+        messageDiv.className = 'p-3 rounded-lg mb-4 bg-red-100 border border-red-400 text-red-700';
+        messageDiv.textContent = 'Error verifying OTP. Please try again.';
+        messageDiv.classList.remove('hidden');
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    });
+
+    document.getElementById('resendOtpBtn')?.addEventListener('click', async function() {
+      const resendBtn = this;
+      const messageDiv = document.getElementById('patientMessage');
+      const originalText = resendBtn.innerHTML;
+      
+      // Clear OTP input
+      document.getElementById('otpInput').value = '';
+      
+      // Show loading state
+      resendBtn.disabled = true;
+      resendBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+      messageDiv.classList.add('hidden');
+
+      try {
+        const response = await fetch('/patientPage/send-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: patientEmailValue })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          messageDiv.className = 'p-3 rounded-lg mb-4 bg-green-100 border border-green-400 text-green-700';
+          messageDiv.textContent = 'New OTP sent successfully! Please check your email.';
+          messageDiv.classList.remove('hidden');
+        } else {
+          messageDiv.className = 'p-3 rounded-lg mb-4 bg-red-100 border border-red-400 text-red-700';
+          messageDiv.textContent = data.message || 'Failed to resend OTP. Please try again.';
+          messageDiv.classList.remove('hidden');
+        }
+      } catch (error) {
+        messageDiv.className = 'p-3 rounded-lg mb-4 bg-red-100 border border-red-400 text-red-700';
+        messageDiv.textContent = 'Error resending OTP. Please try again.';
+        messageDiv.classList.remove('hidden');
+      } finally {
+        resendBtn.disabled = false;
+        resendBtn.innerHTML = originalText;
+      }
+    });
+
+    document.getElementById('backToEmailBtn')?.addEventListener('click', function() {
+      document.getElementById('emailStep').classList.remove('hidden');
+      document.getElementById('otpStep').classList.add('hidden');
+      document.getElementById('otpInput').value = '';
+      document.getElementById('patientMessage').classList.add('hidden');
+    });
+
+    // Allow only numbers in OTP input
+    document.getElementById('otpInput')?.addEventListener('input', function(e) {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    function GoogleAuth() {
+        window.location.href="http://localhost:4040/patientPage/auth/google"
+      }
+  </script>
+</body>
+</html>
